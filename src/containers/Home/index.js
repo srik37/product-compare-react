@@ -6,7 +6,10 @@ import {connect} from 'react-redux'
 
 class Home extends Component {
   componentWillMount() {
-    this.props.actions.getProducts()
+    this
+      .props
+      .actions
+      .getProducts()
   }
 
   render() {
@@ -17,23 +20,16 @@ class Home extends Component {
       <div className="home mt-5">
         <div className="row">
           <div className="col-12">
-            <h2 className="mb-3">Compare Products</h2>
+            <h2 className="mb-3">Compare These Great Products</h2>
           </div>
         </div>
-        <ProductList products={products} compare={actions.compare}/>
-        {compareProducts.length >= 2 &&
-          <Compare products={compareProducts}/>
-        }
+        <ProductList products={products} compare={actions.compare}/> {compareProducts.length >= 2 && <Compare products={compareProducts}/>
+}
       </div>
     )
   }
 }
 
-export default connect(
-  state => ({
-    products: state.product.products
-  }),
-  dispatch => ({
-    actions: bindActionCreators(productActions, dispatch)
-  })
-)(Home)
+export default connect(state => ({products: state.product.products}), dispatch => ({
+  actions: bindActionCreators(productActions, dispatch)
+}))(Home)
